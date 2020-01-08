@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
 import Post from '../models/Post';
+import TypePost from '../models/TypePost';
 
 class PostController {
   async index(req, res) {
@@ -13,6 +14,13 @@ class PostController {
           where: {
             user_id: req.id,
           },
+          include: [
+            {
+              model: TypePost,
+              as: 'type',
+              attributes: ['title'],
+            },
+          ],
           page,
           paginate,
           order: [['updatedAt', 'DESC']],

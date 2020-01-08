@@ -19,7 +19,7 @@ class Post extends Model {
   static associate(models) {
     this.belongsTo(models.TypePost, {
       foreignKey: 'type_post_id',
-      as: 'typePost',
+      as: 'type',
     });
     this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
   }
