@@ -2,23 +2,21 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   profile: null,
+  // postsCount: null,
 };
 
 export default function auth(state = INITIAL_STATE, action) {
   return produce(state, draft => {
     switch (action.type) {
       case '@auth/SIGN_IN_SUCCESS': {
-        draft.profile = action.payload.user;
-        break;
-      }
-
-      case '@user/UPDATE_PROFILE_SUCCESS': {
-        draft.profile = action.payload.profile;
+        draft.user = action.payload.user;
+        // draft.postsCount = action.payload.postsCount;
         break;
       }
 
       case '@auth/SIGN_OUT': {
-        draft.profile = null;
+        draft.user = null;
+        // draft.postsCount = null;
         break;
       }
 

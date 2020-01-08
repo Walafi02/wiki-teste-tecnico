@@ -6,7 +6,7 @@ export default reducers => {
     {
       key: 'wiki',
       storage,
-      whitelist: ['auth', 'user'],
+      whitelist: ['auth', 'user', 'posts'],
     },
     reducers
   );

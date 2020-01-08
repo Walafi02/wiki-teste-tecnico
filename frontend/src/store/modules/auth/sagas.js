@@ -10,23 +10,17 @@ export function* signIn({ payload }) {
   try {
     const { email, password } = payload;
 
-    const response = yield call(api.post, 'sessions', {
+    const response = yield call(api.post, 'signin', {
       email,
       password,
     });
 
-    const { token, user } = response.data;
-
-    if (!user.provider) {
-      toast.error('Usuario nao é provedor');
-      return;
-    }
+    const { token, user, postsCount } = response.data;
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
-    yield put(signInSuccess(token, user));
-
-    history.push('/dashboard');
+    yield put(signInSuccess(token, user, postsCount));
+    history.push('/posts');
   } catch (err) {
     toast.error('Falha na autenticação, verifique seus dados.');
     yield put(signFailure());
@@ -35,17 +29,18 @@ export function* signIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
-    const { name, email, password } = payload;
+    const { name, email, password, repassword } = payload;
 
-    yield call(api.post, 'users', {
+    yield call(api.post, 'signup', {
       name,
       email,
       password,
-      provider: true,
+      repassword,
     });
 
     history.push('/');
   } catch (error) {
+    console.tron.error(error);
     toast.error('Falha ao criar o usuário, verifique seus dados.');
 
     yield put(signFailure());
@@ -67,7 +62,7 @@ export function signOut() {
 }
 
 export default all([
-  takeLatest('persist/REHYDRATE', setToken), // aaction lancada quando se tem um update de pagina
+  takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
   takeLatest('@auth/SIGN_OUT', signOut),

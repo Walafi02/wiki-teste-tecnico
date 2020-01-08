@@ -43,4 +43,10 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  .content{
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
 `;

@@ -2,6 +2,9 @@ import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { signInRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -11,9 +14,10 @@ const schema = Yup.object().shape({
 });
 
 export default function SignIn() {
+  const dispatch = useDispatch();
+
   async function handleSubmit({ email, password }) {
-    // console.log({ email, password });
-    // dispatch(signInRequest(email, password));
+    dispatch(signInRequest(email, password));
   }
 
   return (
@@ -24,12 +28,14 @@ export default function SignIn() {
         name="email"
         type="email"
         placeholder="exemplo@email.com"
+        value="walafif@yahoo.com"
       />
       <Input
         label="Senha"
         name="password"
         type="password"
         placeholder="********"
+        value="123456"
       />
 
       <button type="submit">Entrar no sistema</button>
