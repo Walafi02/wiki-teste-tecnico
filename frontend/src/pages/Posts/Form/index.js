@@ -32,6 +32,7 @@ export default function FormPosts({ match }) {
   const { id } = match.params;
 
   const [selected, setSelected] = useState(null);
+  const [oldType, setOldType] = useState(null);
   const [file_id, setFileID] = useState(null);
   const [fileName, setFileName] = useState(null);
   const [post, setPost] = useState({
@@ -43,7 +44,9 @@ export default function FormPosts({ match }) {
 
   function handleSubmit({ title, type_post_id, content }) {
     if (id) {
-      dispatch(updatePostRequest(id, title, type_post_id, content, file_id));
+      dispatch(
+        updatePostRequest(id, title, type_post_id, content, file_id, oldType)
+      );
     } else {
       dispatch(createPostRequest(title, type_post_id, content, file_id));
     }
@@ -54,6 +57,7 @@ export default function FormPosts({ match }) {
       try {
         const { data } = await api.get(`/posts/${id}`);
         setSelected(data.type_post_id);
+        setOldType(data.type_post_id);
         if (data.file) {
           setFileName(data.file.name);
           setFileID(data.file.id);
@@ -92,6 +96,7 @@ export default function FormPosts({ match }) {
                 name="type_post_id"
                 options={options}
                 value={selected}
+                onChange={e => setSelected(e.target.value)}
               />
             </Field>
 

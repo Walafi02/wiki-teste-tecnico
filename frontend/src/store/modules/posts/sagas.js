@@ -50,7 +50,7 @@ export function* createPostRequest({ payload }) {
 }
 
 export function* updatePostRequest({ payload }) {
-  const { id, title, type_post_id, content, file_id } = payload;
+  const { id, title, type_post_id, content, file_id, oldType } = payload;
   try {
     yield call(api.put, `posts/${id}`, {
       title,
@@ -58,8 +58,11 @@ export function* updatePostRequest({ payload }) {
       content,
       file_id,
     });
-    yield put(addCountPosts(payload.type_post_id));
-    yield put(delCountPosts(type_post_id));
+
+    if (oldType !== type_post_id) {
+      yield put(addCountPosts(type_post_id));
+      yield put(delCountPosts(oldType));
+    }
 
     history.push('/posts');
     toast.success('Sucesso ao editar posts!');

@@ -19,10 +19,17 @@ export function createPostRequest(title, type_post_id, content, file_id) {
   };
 }
 
-export function updatePostRequest(id, title, type_post_id, content, file_id) {
+export function updatePostRequest(
+  id,
+  title,
+  type_post_id,
+  content,
+  file_id,
+  oldType
+) {
   return {
     type: '@post/UPDATE_POST_REQUEST',
-    payload: { id, title, type_post_id, content, file_id },
+    payload: { id, title, type_post_id, content, file_id, oldType },
   };
 }
 
