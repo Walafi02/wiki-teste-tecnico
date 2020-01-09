@@ -50,9 +50,14 @@ export function* createPostRequest({ payload }) {
 }
 
 export function* updatePostRequest({ payload }) {
-  const { id, title, type_post_id, content } = payload;
+  const { id, title, type_post_id, content, file_id } = payload;
   try {
-    yield call(api.put, `posts/${id}`, { title, type_post_id, content });
+    yield call(api.put, `posts/${id}`, {
+      title,
+      type_post_id,
+      content,
+      file_id,
+    });
     yield put(addCountPosts(payload.type_post_id));
     yield put(delCountPosts(type_post_id));
 

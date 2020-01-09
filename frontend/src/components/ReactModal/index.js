@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import { Container, ModalBody } from './styles';
 
@@ -20,16 +19,10 @@ const customStyles = {
   },
 };
 
-export default function HelpModal({ modalIsOpen, closeModal, post }) {
+export default function ReactModal({ modalIsOpen, closeModal, post }) {
   useEffect(() => {
     Modal.setAppElement('body');
   }, []);
-
-  useEffect(() => {
-    if (post) {
-      console.tron.log(post.content);
-    }
-  }, [post]);
 
   return (
     <Container>
@@ -44,7 +37,11 @@ export default function HelpModal({ modalIsOpen, closeModal, post }) {
 
           <p>{post ? post.content : ''}</p>
 
-          <Link to="/posts">Anexo</Link>
+          {post && post.file && (
+            <a href={post.file.url} target="_blank">
+              Anexo - {post.file.name}
+            </a>
+          )}
 
           <div>
             <button type="button" onClick={closeModal}>
@@ -57,8 +54,20 @@ export default function HelpModal({ modalIsOpen, closeModal, post }) {
   );
 }
 
-HelpModal.propTypes = {
+ReactModal.propTypes = {
   modalIsOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
-  post: PropTypes.func.isRequired,
+  post: PropTypes.shape({
+    id: PropTypes.number,
+    file: PropTypes.object,
+    title: PropTypes.string,
+    content: PropTypes.string,
+    type: PropTypes.shape({
+      title: PropTypes.string,
+    }),
+  }),
+};
+
+ReactModal.defaultProps = {
+  post: {},
 };

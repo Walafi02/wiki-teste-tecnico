@@ -15,9 +15,13 @@ import {
   updatePostRequest,
 } from '~/store/modules/posts/actions';
 
+import InputFile from '~/components/InputFile';
+
 const schema = Yup.object().shape({
   title: Yup.string().required('O Titulo é obrigatorio'),
-  type_post_id: Yup.number().required('O tipo de post é obrigatorio'),
+  type_post_id: Yup.number()
+    .required('O tipo de post é obrigatorio')
+    .typeError('Selecione um typo para o post'),
   file: Yup.string(),
   content: Yup.string().required('O Conteudo é obrigatorio'),
 });
@@ -28,18 +32,20 @@ export default function FormPosts({ match }) {
   const { id } = match.params;
 
   const [selected, setSelected] = useState(null);
+  const [file_id, setFileID] = useState(null);
+  const [fileName, setFileName] = useState(null);
   const [post, setPost] = useState({
-    title: '',
+    title: null,
     type_post_id: null,
-    file: '',
-    content: '',
+    content: null,
+    file_id: null,
   });
 
   function handleSubmit({ title, type_post_id, content }) {
     if (id) {
-      dispatch(updatePostRequest(id, title, type_post_id, content));
+      dispatch(updatePostRequest(id, title, type_post_id, content, file_id));
     } else {
-      dispatch(createPostRequest(title, type_post_id, content));
+      dispatch(createPostRequest(title, type_post_id, content, file_id));
     }
   }
 
@@ -48,6 +54,10 @@ export default function FormPosts({ match }) {
       try {
         const { data } = await api.get(`/posts/${id}`);
         setSelected(data.type_post_id);
+        if (data.file) {
+          setFileName(data.file.name);
+          setFileID(data.file.id);
+        }
         setPost(data);
       } catch (error) {
         toast.error('Error ao buscar o Post, verifique suas permissões');
@@ -86,7 +96,14 @@ export default function FormPosts({ match }) {
             </Field>
 
             <Field>
-              <Input label="arquivo" name="file" type="file" />
+              <InputFile
+                label="Selecione em arquivo"
+                name="file_id"
+                setFileID={setFileID}
+                setFileName={setFileName}
+                fileName={fileName}
+                fileID={file_id}
+              />
             </Field>
           </div>
           <div>
@@ -109,5 +126,5 @@ FormPosts.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.string,
     }),
-  }),
+  }).isRequired,
 };

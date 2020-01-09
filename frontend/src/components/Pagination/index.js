@@ -6,7 +6,6 @@ import {
   MdFastForward,
   MdFastRewind,
 } from 'react-icons/md';
-import PropTypes from 'prop-types';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -124,7 +123,3 @@ export default function App() {
     </>
   );
 }
-
-App.propTypes = {
-  handlePageChange: PropTypes.func.isRequired,
-};

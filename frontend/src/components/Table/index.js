@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deletePostRequest } from '../../store/modules/posts/actions';
@@ -15,10 +15,6 @@ export default function Table() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [post, setPost] = useState(null);
-
-  // useEffect(() => {
-  //   setModalIsOpen(true);
-  // }, []);
 
   function closeModal() {
     setModalIsOpen(false);
@@ -61,7 +57,7 @@ export default function Table() {
 
           <tbody>
             {posts.map(p => (
-              <tr>
+              <tr key={p.id}>
                 <td>{p.id}</td>
                 <td>{p.type.title}</td>
                 <td>{p.title}</td>

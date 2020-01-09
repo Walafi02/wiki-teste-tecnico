@@ -12,17 +12,17 @@ export function successPosts(data) {
   };
 }
 
-export function createPostRequest(title, type_post_id, content) {
+export function createPostRequest(title, type_post_id, content, file_id) {
   return {
     type: '@post/CREATE_POST_REQUEST',
-    payload: { title, type_post_id, content },
+    payload: { title, type_post_id, content, file_id },
   };
 }
 
-export function updatePostRequest(id, title, type_post_id, content) {
+export function updatePostRequest(id, title, type_post_id, content, file_id) {
   return {
     type: '@post/UPDATE_POST_REQUEST',
-    payload: { id, title, type_post_id, content },
+    payload: { id, title, type_post_id, content, file_id },
   };
 }
 

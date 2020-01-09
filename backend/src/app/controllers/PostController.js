@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 
 import Post from '../models/Post';
 import TypePost from '../models/TypePost';
+import File from '../models/File';
 
 class PostController {
   async index(req, res) {
@@ -9,7 +10,15 @@ class PostController {
     const { page = 1, paginate = 10, type_post_id = [1, 2, 3, 4] } = req.query;
 
     const posts = id
-      ? await Post.findByPk(id)
+      ? await Post.findByPk(id, {
+          include: [
+            {
+              model: File,
+              as: 'file',
+              attributes: ['id', 'path', 'url', 'name'],
+            },
+          ],
+        })
       : await Post.paginate({
           where: {
             user_id: req.id,
@@ -20,6 +29,11 @@ class PostController {
               model: TypePost,
               as: 'type',
               attributes: ['id', 'title'],
+            },
+            {
+              model: File,
+              as: 'file',
+              attributes: ['id', 'path', 'url', 'name'],
             },
           ],
           page,
@@ -38,13 +52,14 @@ class PostController {
       title: Yup.string().required(),
       content: Yup.string().required(),
       type_post_id: Yup.number().required(),
+      file_id: Yup.number(),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fields' });
     }
 
-    const { title, content, type_post_id } = req.body;
+    const { title, content, type_post_id, file_id } = req.body;
     const { id } = req;
 
     const post = await Post.create({
@@ -52,9 +67,8 @@ class PostController {
       content,
       type_post_id,
       user_id: id,
+      file_id,
     });
-
-    console.log(content);
 
     return res.json(post);
   }
