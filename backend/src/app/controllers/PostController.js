@@ -52,7 +52,6 @@ class PostController {
       title: Yup.string().required(),
       content: Yup.string().required(),
       type_post_id: Yup.number().required(),
-      file_id: Yup.number(),
     });
 
     if (!(await schema.isValid(req.body))) {

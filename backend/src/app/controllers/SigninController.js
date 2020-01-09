@@ -47,6 +47,7 @@ class SigninController {
       const element = typePosts[i];
       const count = await Post.count({
         where: {
+          user_id: id,
           type_post_id: element.id,
         },
       });
