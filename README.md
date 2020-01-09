@@ -22,7 +22,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - [Node.js](https://nodejs.org/en/)
 - [React](https://reactjs.org)
-- [PostgresSQL](https://www.postgresql.org/)
+- [PostgreSQL](https://www.postgresql.org/)
 
 ## 💻 Projeto
 
