@@ -28,14 +28,12 @@ export default function SignIn() {
         name="email"
         type="email"
         placeholder="exemplo@email.com"
-        value="walafif@yahoo.com"
       />
       <Input
         label="Senha"
         name="password"
         type="password"
         placeholder="********"
-        value="123456"
       />
 
       <button type="submit">Entrar no sistema</button>

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   header {
+    padding: 3px 0;
     margin-top: 20px;
     display: flex;
     justify-content: space-between;

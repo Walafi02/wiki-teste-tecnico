@@ -8,6 +8,7 @@ import { Container } from './styles';
 export default function Header() {
   const postsCount = useSelector(state => state.posts.count);
   const type_post_id = useSelector(state => state.posts.type_post_id);
+  const user = useSelector(state => state.user.user);
 
   const dispatch = useDispatch();
 
@@ -42,7 +43,7 @@ export default function Header() {
       </nav>
 
       <div className="side">
-        <span className="name">Walafi Ferreira</span>
+        <span className="name">{user.name}</span>
         <button type="button" onClick={handleExit}>
           Sair
         </button>

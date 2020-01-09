@@ -78,7 +78,7 @@ export default function Table() {
           </tbody>
         </Container>
       ) : (
-        <Empt>Sem Item na lista</Empt>
+        <Empt>Sem Posts na Lista</Empt>
       )}
     </>
   );

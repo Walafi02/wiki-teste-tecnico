@@ -71,7 +71,7 @@ export default function FormPosts({ match }) {
   return (
     <Container className="content">
       <header>
-        <strong>Novo Post</strong>
+        <strong>{id ? 'Editar' : 'Novo'} Post</strong>
       </header>
 
       <Form schema={schema} onSubmit={handleSubmit} initialData={post}>
