@@ -15,6 +15,7 @@ export default function routes() {
       <Route path="/new" exact component={SignUp} />
       <Route path="/Posts" exact component={Posts} isPrivate />
       <Route path="/Posts/new" exact component={PostForm} isPrivate />
+      <Route path="/Posts/edit/:id" exact component={PostForm} isPrivate />
     </Switch>
   );
 }

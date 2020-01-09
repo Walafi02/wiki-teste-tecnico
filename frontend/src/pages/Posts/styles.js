@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   header {
+    padding: 3px 0;
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
@@ -11,21 +12,17 @@ export const Container = styled.div`
       font-size: 22px;
     }
 
-    /* button {
-      color: #fff;
-      font-size: 18px;
-      font-weight: bold;
+    div {
+      a,
+      button {
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
 
-      padding: 4px 12px;
-      border: none;
-      background: transparent;
-    } */
-    a {
-      color: #fff;
-      font-size: 18px;
-      font-weight: bold;
-
-      padding: 4px 12px;
+        padding: 0 12px;
+        background: transparent;
+        border: none;
+      }
     }
   }
 `;

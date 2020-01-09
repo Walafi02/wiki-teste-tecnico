@@ -14,19 +14,35 @@ export const Container = styled.table`
   thead th {
     text-align: left;
     padding: 12px;
-
-    /* + th {
-      text-align: center;
-    } */
   }
 
   tbody td {
     text-align: left;
     padding: 12px;
 
-    /* + td {
-      text-align: center;
-    } */
+    display: flex;
+    align-items: center;
+  }
+
+  td.actions {
+    display: flex;
+    align-items: center;
+    button,
+    a {
+      background: red;
+      padding: 6px 12px;
+      margin: 5px;
+      font-size: 12px;
+      color: #444444;
+      background: transparent;
+      /* border: none; */
+      border: 1px solid transparent;
+
+      &:hover {
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+      }
+    }
   }
 
   tbody tr:hover {
@@ -36,4 +52,9 @@ export const Container = styled.table`
   tbody tr.empty-row:hover {
     background: none;
   }
+`;
+
+export const Empt = styled.h1`
+  text-align: center;
+  color: #fff;
 `;

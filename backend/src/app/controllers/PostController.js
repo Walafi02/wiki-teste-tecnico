@@ -6,19 +6,20 @@ import TypePost from '../models/TypePost';
 class PostController {
   async index(req, res) {
     const { id } = req.params;
-    const { page = 1, paginate = 10 } = req.query;
+    const { page = 1, paginate = 10, type_post_id = [1, 2, 3, 4] } = req.query;
 
     const posts = id
       ? await Post.findByPk(id)
       : await Post.paginate({
           where: {
             user_id: req.id,
+            type_post_id,
           },
           include: [
             {
               model: TypePost,
               as: 'type',
-              attributes: ['title'],
+              attributes: ['id', 'title'],
             },
           ],
           page,
@@ -52,6 +53,8 @@ class PostController {
       type_post_id,
       user_id: id,
     });
+
+    console.log(content);
 
     return res.json(post);
   }
