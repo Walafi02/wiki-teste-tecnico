@@ -13,7 +13,7 @@
 <br>
 
 <p align="center">
-  <img alt="Frontend" src=".github/00-login.png" width="100%">
+  <img alt="Frontend" src=".github/wiki.gif" width="100%">
 </p>
 
 ## 🚀 Tecnologias
