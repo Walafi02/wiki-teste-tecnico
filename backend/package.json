@@ -5,8 +5,12 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server",
+    "prod": "yarn build && yarn start",
     "build": "sucrase ./src -d ./dist --transforms imports",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "migrate:undo": "yarn sequelize db:migrate:undo:all",
+    "migrate": "yarn sequelize db:migrate",
+    "seed": "yarn sequelize db:seed:all"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

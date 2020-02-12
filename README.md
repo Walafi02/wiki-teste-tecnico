@@ -23,6 +23,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Node.js](https://nodejs.org/en/)
 - [React](https://reactjs.org)
 - [PostgreSQL](https://www.postgresql.org/)
+- [Docker Compose](https://docs.docker.com/compose/)
 
 ## 💻 Projeto
 
@@ -32,30 +33,8 @@ O projeto trata-se de um Wiki, onde é possível realizar cadastro e login, cria
 
 ## 📥 Instalação e execução
 
-Faça um clone desse repositório
+  1. Faça um clone desse repositório
+  2. A partir da raiz do projeto, execute o comando `docker-compose up` e aguarde a inicialização dos servidores;
+  3. A partir de seu browser abra a [Página de Login](http://localhost:3000).
 
-  ### Backend
-  1. A partir da raiz do projeto, entre na pasta rodando `cd backend`;
-  2. Inicie os banco de dado postgresql utilizando docker, e crie o banco `wiki` no postgres:
-  ```bash
-    $ docker run --name postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres:11
-    $
-    $ docker exec -it postgres /bin/sh
-    # su postgres
-    /$ psql
-    postgres=# CREATE DATABASE wiki;
-    postgres=# exit
-    /$ exit
-    # exit
-  ```
-  3. Crie um arquivo `.env` a partir do arquivo `.env.example` preenchendo todas as variáveis pedidas;
-  4. Rode `npm install` para instalar todas as dependências;
-  5. Rode `npx sequelize db:migrate` para criar as migrations;
-  6. Rode `npx sequelize db:seed:all` para popular o banco;
-  7. Rode `npm run build && npm run start` em um novo terminal para compilar e iniciar o servidor node;
-
-  ### Frontend
-  1. A partir da raiz do projeto, entre na pasta rodando `cd frontend`;
-  2. Rode `npm install` para instalar as dependências;
-  3. Rode `npm run start` para iniciar o servidor de desenvolvimento;
-  4. Abra `http://localhost:3000` para ver o projeto no navegador.
+  <i>Obs.:</i> O processo de inicialização dos servidores podem demorar alguns minutos,

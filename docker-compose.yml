@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  wiki-frontend:
+    container_name: wiki-frontend
+    build: ./frontend
+    entrypoint: ['./init.sh']
+    volumes:
+      - ./frontend:/home/node/api
+      - /home/node/api/node_modules
+    depends_on:
+      - wiki-backend
+    networks:
+      - app-connect
+    ports:
+      - '3000:3000'
+
+  wiki-backend:
+    container_name: wiki-backend
+    build: ./backend
+    entrypoint: ['./init.sh']
+    volumes:
+      - ./backend:/home/node/api
+      - /home/node/api/node_modules
+    depends_on:
+      - wiki-postgres
+    networks:
+      - app-connect
+    ports:
+      - '3003:3003'
+
+  wiki-postgres:
+    container_name: wiki-postgres
+    image: postgres:11
+    volumes:
+      - wiki-postgres-data:/data
+    environment:
+      POSTGRES_DB: wiki
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+    networks:
+      - app-connect
+    ports:
+      - '5432:5432'
+
+volumes:
+  wiki-postgres-data:
+
+networks:
+  app-connect:
+      driver: bridge
